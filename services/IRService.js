@@ -73,19 +73,19 @@ function ScoreObjectValid(score)
 
     //todo: take in chart object and ensure crit + almost + miss == maxCombo?
     //we do not currently store maxCombo though.
-    if(!("crit") in score) return false;
+    if(!("crit" in score)) return false;
     if(typeof score.crit != "number") return false;
     if(score.crit < 0) return false;
 
-    if(!("almost") in score) return false;
+    if(!("almost" in score)) return false;
     if(typeof score.almost != "number") return false;
     if(score.almost < 0) return false;
 
-    if(!("miss") in score) return false;
+    if(!("miss" in score)) return false;
     if(typeof score.miss != "number") return false;
     if(score.miss < 0) return false;
 
-    if(!("windows") in score) return false;
+    if(!("windows" in score)) return false;
     if(typeof score.windows != "object") return false;
 
     for(let key in global.CONFIG.typicalWindows)
