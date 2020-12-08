@@ -12,6 +12,6 @@ router.use(IRService.Authorize);
 router.get("/",                         IRService.Heartbeat);
 router.get("/charts/:chartHash",        IRService.ChartTracked);
 router.get("/charts/:chartHash/record", IRService.Record);
-router.get("/score/submit",             IRService.SubmitScore);
+router.post("/score/submit",            IRService.SubmitScore);
 
 module.exports = router;
