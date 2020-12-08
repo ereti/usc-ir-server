@@ -16,6 +16,9 @@ function ChartObjectValid(chart)
     if(!chart) return false;
     if(typeof chart != "object") return false;
 
+    if(!("chartHash") in chart) return false;
+    if(typeof chart.chartHash != "string") return false;
+
     //todo: sanity checks on length for string fields? sanity check on characters like newlines? unicode RTL? etc
     if(!("artist" in chart)) return false;
     if(typeof chart.artist != "string") return false;
@@ -40,6 +43,8 @@ function ChartObjectValid(chart)
     //todo: format check here w/ regex
     if(!("bpm" in chart)) return false;
     if(typeof chart.bpm != "string") return false;
+
+    return true;
 }
 
 function ScoreObjectValid(score)
