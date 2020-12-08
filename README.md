@@ -1,7 +1,9 @@
 # usc-ir-server
 
-This server is a fully usable example of an IR server for [unnamed-sdvx-clone](https://github.com/Drewol/unnamed-sdvx-clone).
+This server is a mostly usable example of an IR server for [unnamed-sdvx-clone](https://github.com/Drewol/unnamed-sdvx-clone).
 It implements the [USC-IR specification](https://uscir.readthedocs.io/en/latest/index.html).
+However, at present it does not have a web UI for the creation of accounts, or viewing of leaderboards, etc.
+It solely implements the specification for interaction with the game at this time.
 
 ## Prerequisites
 
@@ -12,6 +14,8 @@ If you use Docker, this is very simple:
 docker pull mongo
 docker run -d -p 27017:27017 --name mongodb mongo
 ```
+
+You may also wish to set up the server behind an [NginX](https://nginx.com/) reverse proxy, for HTTPS.
 
 ## Running
 
