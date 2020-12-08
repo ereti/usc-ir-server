@@ -6,7 +6,7 @@ async function WillTrack(hash)
 
     //if acceptNewCharts is true, we will accept scores on this chart even though we don't currently track it,
     //so we should respond with 20
-    if(!chart && !config.acceptNewCharts) return false;
+    if(!chart && !global.CONFIG.acceptNewCharts) return false;
 
     return true;
 }
