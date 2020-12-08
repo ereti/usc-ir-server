@@ -5,6 +5,7 @@ const IRService = require("../services/IRService.js");
 
 const router = express.Router();
 
+router.use(bodyparser.json());
 router.use(IRService.Authorize);
 
 //Heartbeat
