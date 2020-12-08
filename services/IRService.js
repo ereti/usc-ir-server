@@ -120,7 +120,7 @@ function ScoreObjectToServerScore(score)
 
     ServerScore.crit = score.crit;
     ServerScore.near = score.almost;
-    ServerScore.miss = score.miss;
+    ServerScore.error = score.miss;
 
     ServerScore.gaugeMod = (score.gameflags & 0b1 != 0) ? "HARD" : "NORMAL";
 
@@ -205,7 +205,7 @@ async function Record(req, res)
         statusCode: 20,
         description: "",
         body: {
-            record: record ? record.score : null
+            record: record ? Object.assign(record.score, {username: record.username, ranking: 1}) : null
         }
     });
 }
@@ -324,7 +324,7 @@ async function SubmitScore(req, res)
 
     //reuse our previous data here
     let adjacentAboveDocs = betterThanPBDocs.slice(-global.CONFIG.adjacentRecordsN);
-    if(currentRecordDoc && adjacentAboveDocs[0]._id == currentRecordDoc._id) adjacentAboveDocs.shift() //satisfies key assumption #1
+    if(currentRecordDoc && adjacentAboveDocs[0] && adjacentAboveDocs[0]._id.toString() == currentRecordDoc._id.toString()) adjacentAboveDocs.shift() //satisfies key assumption #1
     //note: in the case where this score is the new record, adjacentAboveDocs will be empty anyway,
     //so there's no need for us to care about this case and add a check for it
 
@@ -355,6 +355,8 @@ async function SubmitScore(req, res)
         let ret = e.score;
         ret.username = e.username;
         ret.ranking = newPBRanking + i + 1;
+
+        return ret;
     })
 
     //finally, put it all together.
