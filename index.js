@@ -1,7 +1,7 @@
 process.env.NODE_ENV = "production";
 
 //globals
-global.CONFIG = require("config.json");
+global.CONFIG = require("./config.json");
 global.DB     = require("./lib/db.js");
 
 //packages
