@@ -1,0 +1,23 @@
+{
+  "name": "usc-ir-server",
+  "version": "0.1.0",
+  "description": "An example IR server implementing the USC-IR specification",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ereti/usc-ir-server.git"
+  },
+  "author": "ereti",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ereti/usc-ir-server/issues"
+  },
+  "homepage": "https://github.com/ereti/usc-ir-server#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "monk": "^7.3.2"
+  }
+}

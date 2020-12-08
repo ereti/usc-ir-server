@@ -1,0 +1,14 @@
+{
+    "serverPort": 8080,
+    "serverName": "USC-IR-Server",
+    "acceptNewCharts": true,
+    "adjacentRecordsN": 2,
+    "database": "localhost",
+    "typicalWindows": {
+        "perfect": 46,
+        "good": 92,
+        "hold": 138,
+        "miss": 250
+    },
+    "acceptAtypicalWindows": false
+}
