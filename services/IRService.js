@@ -314,7 +314,7 @@ async function SubmitScore(req, res)
     });
 
     //step 6 (just makes sense to be established here)
-    let isServerRecord = serverScore.score >= currentRecordDoc.score.score;
+    let isServerRecord = !currentRecordDoc || serverScore.score >= currentRecordDoc.score.score;
 
     if(isServerRecord) serverRecord = Object.assign({}, serverScore, {username: req.user.username, ranking: 1});
     else serverRecord = Object.assign({}, currentRecordDoc.score, {username: currentRecordDoc.username, ranking: 1});
@@ -324,7 +324,7 @@ async function SubmitScore(req, res)
 
     //reuse our previous data here
     let adjacentAboveDocs = betterThanPBDocs.slice(-global.CONFIG.adjacentRecordsN);
-    if(adjacentAboveDocs[0]._id == currentRecordDoc._id) adjacentAboveDocs.shift() //satisfies key assumption #1
+    if(currentRecordDoc && adjacentAboveDocs[0]._id == currentRecordDoc._id) adjacentAboveDocs.shift() //satisfies key assumption #1
     //note: in the case where this score is the new record, adjacentAboveDocs will be empty anyway,
     //so there's no need for us to care about this case and add a check for it
 
