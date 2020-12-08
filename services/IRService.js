@@ -316,8 +316,8 @@ async function SubmitScore(req, res)
     //step 6 (just makes sense to be established here)
     let isServerRecord = !currentRecordDoc || serverScore.score >= currentRecordDoc.score.score;
 
-    if(isServerRecord) serverRecord = Object.assign({}, serverScore, {username: req.user.username, ranking: 1});
-    else serverRecord = Object.assign({}, currentRecordDoc.score, {username: currentRecordDoc.username, ranking: 1});
+    if(isServerRecord) serverRecordSS = Object.assign({}, serverScore, {username: req.user.username, ranking: 1});
+    else serverRecordSS = Object.assign({}, currentRecordDoc.score, {username: currentRecordDoc.username, ranking: 1});
 
     //step 3: establish adjacentAbove.
     let adjacentAboveSS = null;
