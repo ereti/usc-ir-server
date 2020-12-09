@@ -3,7 +3,7 @@
 */
 
 const express = require("express");
-const IRService = require("../services/IRService.js");
+const IRService = require("../../services/IRService.js");
 
 const router = express.Router();
 

@@ -3,7 +3,7 @@
 */
 
 const express = require("express");
-const WebAuthService = require("../services/WebAuthService.js");
+const WebAuthService = require("../../services/WebAuthService.js");
 
 const router = express.Router();
 
