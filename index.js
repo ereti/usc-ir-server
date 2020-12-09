@@ -13,6 +13,7 @@ const MongoDBStore = require("connect-mongodb-session")(express_session);
 const app     = express();
 app.set("json spaces", 2);
 app.set("view engine", "ejs")
+app.set("views", "./client/views/pages");
 if(global.CONFIG.https)
     app.set("trust proxy", "loopback"); //trust proxy for https.
                                         //if you are having problems with cookies not being set, you're probably doing something more complicated
