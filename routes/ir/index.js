@@ -1,3 +1,7 @@
+/*
+    IR endpoints, i.e. those endpoints that will be communicated with by USC.
+*/
+
 const express = require("express");
 const IRService = require("../services/IRService.js");
 
