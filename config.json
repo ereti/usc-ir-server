@@ -1,6 +1,7 @@
 {
     "https": false,
     "hashWorkFactor": 12,
+    "webUICookieSecret": "you should definitely change me :)",
     "serverPort": 8080,
     "serverName": "USC-IR-Server",
     "database": "localhost",
