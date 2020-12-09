@@ -1,9 +1,12 @@
 {
+    "https": false,
+    "hashWorkFactor": 12,
     "serverPort": 8080,
     "serverName": "USC-IR-Server",
+    "database": "localhost",
+    "allowedUsernameCharacters": "a-zA-Z*-",
     "acceptNewCharts": true,
     "adjacentRecordsN": 2,
-    "database": "localhost",
     "typicalWindows": {
         "perfect": 46,
         "good": 92,
