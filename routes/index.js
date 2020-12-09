@@ -3,6 +3,8 @@ const bodyparser = require("body-parser");
 const express_session = require("express-session");
 const MongoDBStore = require("connect-mongodb-session")(express_session);
 
+const EJSData = require("../middlewares/EJSData.js");
+
 //session config
 const session = express_session({
     name: "webui_session",
@@ -31,7 +33,10 @@ router.use(session);
 
 //everything below = webui endpoints
 
+//prepares req.ejs base values
+router.use(EJSData);
+
 router.use("/auth", require("./auth/"));
-router.get("/", (req, res) => res.render("index", {username: req.session.user.username}));
+router.get("/", (req, res) => res.render("index", req.ejs));
 
 module.exports = router;
