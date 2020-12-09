@@ -54,4 +54,13 @@ class WebAuthService
 
         return res.status(204).end();
     }
+
+    async Logout(req, res)
+    {
+        req.session.destroy();
+
+        return res.redirect("/");
+    }
 }
+
+module.exports = new WebAuthService()
