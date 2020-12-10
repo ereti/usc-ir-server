@@ -1,0 +1,40 @@
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    padding-top: 40px;
+}
+
+#container {
+    width: 100%;
+    max-width: 1000px;
+    padding: 15px;
+    margin: auto;
+    background-color: #DBC8B3;
+    border-radius: 20px;
+    text-align: center;
+}
+
+
+#container h1, #container h3, #container h5 {
+    text-align: center;
+}
+
+#tab-container
+{
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 500px;
+}
+
+.zero-padding {
+    padding: 0 !important;
+}
+
+
+.progress {
+    margin-top: 5px;
+}

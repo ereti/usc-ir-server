@@ -1,0 +1,38 @@
+#main-nav {
+    background-color: #be9b7b !important;
+}
+
+#main-nav .nav-link {
+    color: #fff4e6 !important;
+}
+
+body {
+    background-color: #fff4e6;
+}
+
+#notifs-dropdown {
+    width: 400px;
+    background-color: #fff4e6;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    max-height: 500px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.notif {
+    margin-bottom: 10px;
+    background-color: #DBC8B3;
+    position: relative;
+}
+
+.notif-delete {
+    position: absolute;
+    right: 5px;
+    top: 0px;
+    color: red;
+    display: inline-block;
+    z-index: 1;
+    padding: 10px;
+    margin: -10px;
+}
