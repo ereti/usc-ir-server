@@ -13,7 +13,7 @@ class WebAuthService
         const password = req.body.password;
 
         if(!Validation.Username(username)) return res.status(400).json({invalid: "username", error:"Username must be 2-10 characters, and use only these characters: " + global.CONFIG.allowedUsernameCharacters});
-        if(!Validation.Password(username)) return res.status(400).json({invalid: "password", error:"Password must be 8-50 characters."});
+        if(!Validation.Password(password)) return res.status(400).json({invalid: "password", error:"Password must be 8-50 characters."});
 
         const user_doc = await global.DB.get("users").findOne({username: username});
         if(!user_doc) return res.status(401).json({invalid: "username", error: "User doesn't exist."});
@@ -37,7 +37,7 @@ class WebAuthService
         const password = req.body.password;
 
         if(!Validation.Username(username)) return res.status(400).json({invalid: "username", error:"Username must be 2-10 characters, and use only these characters: " + global.CONFIG.allowedUsernameCharacters});
-        if(!Validation.Password(username)) return res.status(400).json({invalid: "password", error:"Password must be 8-50 characters."});
+        if(!Validation.Password(password)) return res.status(400).json({invalid: "password", error:"Password must be 8-50 characters."});
 
         const user_doc = await global.DB.get("users").findOne({username: username});
         if(user_doc) return res.status(409).json({invalid: "username", error:"Username already taken."});
