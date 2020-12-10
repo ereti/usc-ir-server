@@ -1,3 +1,4 @@
+const path = require("path");
 const express = require("express");
 const bodyparser = require("body-parser");
 const express_session = require("express-session");
@@ -29,7 +30,7 @@ router.use(bodyparser.json());
 router.use("/ir", require("./ir/"));
 
 //static files
-router.use(express.static("../client/static", {
+router.use(express.static(path.join("__dirname", "../client/static"), {
     etag: true,
     setHeaders: function(res, path, stat) {
         res.setHeader("Cache-Control", "max-age=0, must-revalidate");
