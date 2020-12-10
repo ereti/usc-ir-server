@@ -7,7 +7,8 @@ const WebAuthService = require("../../services/WebAuthService.js");
 
 const router = express.Router();
 
-router.get("/login",    WebAuthService.Login);
-router.get("/register", WebAuthService.Register);
+router.post("/login",    WebAuthService.Login);
+router.post("/register", WebAuthService.Register);
+router.get("/logout",    WebAuthService.Logout);
 
 module.exports = router;
