@@ -1,5 +1,9 @@
 const Validation = require("../lib/validation.js");
 const bcrypt = require("bcrypt");
+const crypto = require("crypto");
+const util = require("util");
+
+const randomBytesPromise = util.promisify(crypto.randomBytes);
 
 class WebAuthService
 {
@@ -44,10 +48,20 @@ class WebAuthService
 
         const hash = await bcrypt.hash(password, global.CONFIG.hashWorkFactor);
 
+        let token;
+
+        //this is terrifying but it should only ever run once in reality
+        do {
+            token = (await randomBytesPromise(8)).toString("hex");
+
+
+        } while(await global.DB.get("users").findOne({token}));
+
         const user_profile = {
             username: username,
             password_hash: hash,
             registered_at: Date.now(),
+            token: token
         };
 
         await global.DB.get("users").insert(user_profile);
