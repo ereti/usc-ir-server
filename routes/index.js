@@ -28,7 +28,15 @@ router.use(bodyparser.json());
 //ir (i.e. usc) endpoints
 router.use("/ir", require("./ir/"));
 
-//use session after ir because ir doesn't need our webui sessions
+//static files
+router.use(express.static("../client/static", {
+    etag: true,
+    setHeaders: function(res, path, stat) {
+        res.setHeader("Cache-Control", "max-age=0, must-revalidate");
+    }
+}))
+
+//use session after ir + static because neither of those need to see our web session
 router.use(session);
 
 //everything below = webui endpoints
