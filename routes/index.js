@@ -45,7 +45,12 @@ router.use(session);
 //prepares req.ejs base values
 router.use(EJSData);
 
+//subpaths
 router.use("/auth", require("./auth/"));
+router.use("/api", require("./api/"));
+
+//direct results
 router.get("/", (req, res) => res.render("index", req.ejs));
+router.get("/leaderboards/chart", (req, res) => res.render("chart-leaderboards", req.ejs));
 
 module.exports = router;
