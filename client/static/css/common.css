@@ -1,18 +1,24 @@
 #main-nav {
-    background-color: #be9b7b !important;
+    background-color: var(--color-bg1);
+}
+
+#brand {
+    color: var(--color-highlight);
 }
 
 #main-nav .nav-link {
-    color: #fff4e6 !important;
+    color: var(--color-text);
+    background-color: var(--color-highlight);
+    border-radius: 5px;
 }
 
 body {
-    background-color: #fff4e6;
+    background-color: var(--color-bg2);
 }
 
 #notifs-dropdown {
     width: 400px;
-    background-color: #fff4e6;
+    background-color: var(--color-bg1);
     padding-top: 2px;
     padding-bottom: 2px;
     max-height: 500px;
@@ -22,7 +28,7 @@ body {
 
 .notif {
     margin-bottom: 10px;
-    background-color: #DBC8B3;
+    background-color: var(--color-bg2);
     position: relative;
 }
 
