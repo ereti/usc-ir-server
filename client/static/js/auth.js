@@ -1,10 +1,10 @@
 const login = document.forms.login;
 const register = document.forms.register;
 
-function error({error}, form)
+function error({error, invalid}, form)
 {
     document.getElementById(form + "-feedback").innerText = error;
-    document.getElementById(form).setCustomValidity(error);
+    document.getElementById(invalid + "-" + form).setCustomValidity(error);
 }
 
 
