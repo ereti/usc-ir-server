@@ -1,6 +1,13 @@
 const login = document.forms.login;
 const register = document.forms.register;
 
+if(location.protocol != "https:")
+{
+    $("#register-form").prepend($(`<div class="form-group">
+        <span style="color: red;">Note: server is not using HTTPS. You should definitely not use a password that you use anywhere else.</span>
+    </div>`))
+}
+
 function error({error, invalid}, form)
 {
     document.getElementById(form + "-feedback").innerText = error;
