@@ -9,6 +9,24 @@ let chart_hash_to_chart = {
 
 };
 
+const params = new URLSearchParams(window.location.search);
+
+$(document).ready(_  => {
+    if(params.has("hash"))
+    {
+        fetch("/api/charts?hash=" + params.get("hash"))
+        .then(res => {
+            if(!res.ok) console.log(res.json());
+            else res.json().then(chart => {
+                chart_hash_to_chart[chart.chartHash] = chart;
+
+                load_leaderboard(chart.chartHash);
+            });
+        })
+    }
+})
+
+
 function create_record_row(score)
 {
     var row = $(`<tr></tr>`);
@@ -150,6 +168,23 @@ function display_songs(charts)
     }
 }
 
+function show_scores(chart, scores)
+{
+    for(let score of scores) scores_body.append(create_record_row(score));
+
+    //remember to change #scores-jacket if/when that becomes possible
+    $("#scores-info").empty();
+    $("#scores-info").append($(`
+        <span>Title:<br>${chart.title}</span>
+        <span>Artist:<br>${chart.artist}</span>
+        <span>Effector:<br>${chart.effector}</span>
+        <span>Level:<br>${diff_names[chart.difficulty].toUpperCase()} ${chart.level.toString().padStart(2, "0")}</span>
+    `))
+
+    $("#scores-container").removeClass("hidden");
+    $("#charts-container").addClass("hidden");
+}
+
 function load_leaderboard(hash)
 {
     let chart = chart_hash_to_chart[hash];
@@ -157,22 +192,8 @@ function load_leaderboard(hash)
     let scores = fetch(`/api/charts/${hash}/scores`)
     .then(res => res.json())
     .then(json => {
-        for(let score of json) scores_body.append(create_record_row(score));
-
-        //remember to change #scores-jacket if/when that becomes possible
-        $("#scores-info").empty();
-        $("#scores-info").append($(`
-            <span>Title:<br>${chart.title}</span>
-            <span>Artist:<br>${chart.artist}</span>
-            <span>Effector:<br>${chart.effector}</span>
-            <span>Level:<br>${diff_names[chart.difficulty].toUpperCase()} ${chart.level.toString().padStart(2, "0")}</span>
-        `))
-
-        $("#scores-container").removeClass("hidden");
-        $("#charts-container").addClass("hidden");
+        show_scores(chart, json);
     });
-
-
 }
 
 function back_to_charts()
