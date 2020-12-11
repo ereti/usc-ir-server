@@ -1,28 +1,3 @@
-html, body {
-    height: 100%;
-}
-
-body {
-    display: flex;
-    align-items: center;
-    padding-top: 40px;
-    padding-bottom: 40px;
-}
-
-#container {
-    width: 100%;
-    max-width: 1000px;
-    padding: 15px;
-    margin: auto;
-    background-color: var(--color-bg1);
-    border-radius: 20px;
-}
-
-
-#container h1, #container h3, #container h5 {
-    text-align: center;
-}
-
 #search-box {
     width: 100%;
 }
@@ -144,8 +119,4 @@ body {
 
 .nov {
     background-color: #aa44aa;
-}
-
-.table {
-    color: var(--color-text);
 }

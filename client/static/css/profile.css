@@ -1,5 +1,4 @@
 
-
 #tab-container
 {
     overflow-y: auto;
@@ -14,4 +13,14 @@
 
 .progress {
     margin-top: 5px;
+}
+
+.grayscale {
+    filter: gray;
+    filter: grayscale(1);
+    -webkit-filter: grayscale(1);
+}
+
+.expander {
+    padding: 10px;
 }
