@@ -52,5 +52,13 @@ router.use("/api", require("./api/"));
 //direct results
 router.get("/", (req, res) => res.render("index", req.ejs));
 router.get("/leaderboards/chart", (req, res) => res.render("chart-leaderboards", req.ejs));
+router.get("/profiles/:username", async (req, res) => {
+    const username = req.params.username;
+
+    const user_doc = await global.DB.get("users").findOne({username});
+    if(!user_doc) return res.redirect("/"); //todo: 404 page
+
+    return res.render("profile", Object.assign({profile: user_doc}, req.ejs));
+})
 
 module.exports = router;
