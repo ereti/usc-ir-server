@@ -11,6 +11,7 @@ const router = express.Router();
 
 router.get("/charts",                   WebAPIService.QueryCharts);
 router.get("/charts/:chartHash/scores", WebAPIService.ChartScores);
+router.get("/players/:username/scores", WebAPIService.PlayerScores);
 router.get("/token",    WebLoggedIn,    WebAPIService.GetToken);
 
 module.exports = router;
