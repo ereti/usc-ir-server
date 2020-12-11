@@ -1,0 +1,17 @@
+
+
+#tab-container
+{
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 500px;
+}
+
+.zero-padding {
+    padding: 0 !important;
+}
+
+
+.progress {
+    margin-top: 5px;
+}

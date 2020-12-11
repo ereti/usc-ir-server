@@ -17,6 +17,12 @@ docker run -d -p 27017:27017 --name mongodb mongo
 
 You may also wish to set up the server behind an [NginX](https://nginx.com/) reverse proxy, for HTTPS.
 
+You will also need to install the modules used by the server. Since package.json is provided, this is as simple as running: 
+
+```
+npm install
+```
+
 ## Running
 
 The server can be ran with 
@@ -37,8 +43,15 @@ pm2 start index.js
 The config.json file included in the repository contains all of the configuration keys that are checked by the server. They are documented below.
 
 ```
+https: Whether the server should assume it is using HTTPS
+  When true, cookies are treated as secure, and the server will assume it is operating behind a reverse proxy.
+  Default: false
+hashWorkFactor: The work factor to use for hashing passwords with bcrypt. Bigger = more secure but takes longer. Default: 12
+webUICookieSecret: The secret used to generate session cookies for the web UI. This should be changed, as without it your sessions are unsecure. The default does not matter. Change it.
 serverPort: The port the server will listen on. Default: 8080
-serverName: How the server identifies itself in IR Heartbeat requests. Default: USC-IR-Server
+serverName: How the server identifies itself in IR Heartbeat requests. Also how the server identifies itself on the web UI. Default: USC-IR-Server
+database: The IP to connect to the MongoDB instance on. Default: localhost
+allowedUsernameCharacters: The characters to accept in newly registered usernames. Default: abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789*-
 acceptNewCharts: When the server receives a score for a chart it has never seen before:
   true: the server will store the chart information and accept the score.
   false: the server will reject the score with statusCode 42.
