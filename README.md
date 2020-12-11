@@ -2,8 +2,7 @@
 
 This server is a mostly usable example of an IR server for [unnamed-sdvx-clone](https://github.com/Drewol/unnamed-sdvx-clone).
 It implements the [USC-IR specification](https://uscir.readthedocs.io/en/latest/index.html).
-However, at present it does not have a web UI for the creation of accounts, or viewing of leaderboards, etc.
-It solely implements the specification for interaction with the game at this time.
+It also implements a web UI for registration, viewing of chart leaderboards, and viewing latest scores by a user.
 
 ## Prerequisites
 
