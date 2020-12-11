@@ -23,7 +23,7 @@ function ScoreObjectToServerScore(score)
     //lamp
     {
         if(score.score == 10000000) ServerScore.lamp = 5;
-        else if(score.miss == 0) ServerScore.lamp = 4;
+        else if(score.error == 0) ServerScore.lamp = 4;
         //hard gauge
         else if((score.gameflags & 0b1 != 0) && score.gauge > 0) ServerScore.lamp = 3;
         else if(score.gauge >= 70) ServerScore.lamp = 2;
@@ -33,8 +33,8 @@ function ScoreObjectToServerScore(score)
     ServerScore.timestamp = score.timestamp;
 
     ServerScore.crit = score.crit;
-    ServerScore.near = score.almost;
-    ServerScore.error = score.miss;
+    ServerScore.near = score.near;
+    ServerScore.error = score.error;
 
     ServerScore.gaugeMod = (score.gameflags & 0b1 != 0) ? "HARD" : "NORMAL";
 
