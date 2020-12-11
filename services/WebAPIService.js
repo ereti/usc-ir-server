@@ -25,6 +25,26 @@ class WebAPIService
 
         return res.status(200).json(results);
     }
+
+    async ChartScores(req, res)
+    {
+        let hash = req.params.chartHash;
+
+        let chart_doc = await global.DB.get("charts").findOne({chartHash: hash});
+
+        if(!chart_doc) return res.status(404).json({error:"Chart not found."});
+
+        let pbs = await global.DB.get("scores").find({
+                chartHash: hash,
+                isUserPB: true
+        }, {
+                sort: {
+                    "score.score": -1
+                }
+        });
+
+        return res.status(200).json(pbs);
+    }
 }
 
 module.exports = new WebAPIService();
