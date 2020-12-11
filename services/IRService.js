@@ -1,5 +1,5 @@
 const Validation = require("../lib/validation.js");
-const VERSION = "v1.0.0-a"; //current USC-IR version implemented below
+const VERSION = "v0.1.0-a"; //current USC-IR version implemented below
 
 async function WillTrack(hash)
 {
