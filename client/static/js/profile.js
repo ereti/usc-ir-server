@@ -17,12 +17,12 @@ function add_score(score, chart_hashmap)
     var chart = chart_hashmap[score.chartHash];
     if(!chart)
     {
-        row.append($(`<td>${score.chartHash}</td>`)); //just display hash because we have no idea lol
+        row.append($(`<td><a href="/leaderboards/chart?hash=${score.chartHash}">${score.chartHash}</a></td>`)); //just display hash because we have no idea lol
         row.append($(`<td>??? ??</td>`)); //no idea about level either
     }
     else
     {
-        row.append($(`<td>${chart.title}</td>`)); //todo: link to chart leaderboard page on click
+        row.append($(`<td><a href="/leaderboards/chart?hash=${score.chartHash}">${chart.title}</a></td>`)); //todo: link to chart leaderboard page on click
         row.append($(`<td>${diff_names[chart.difficulty].toUpperCase()} ${chart.level.toString().padStart(2, "0")}</td>`));
     }
 
