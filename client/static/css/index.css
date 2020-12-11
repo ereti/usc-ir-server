@@ -6,11 +6,6 @@ body {
     display: flex;
     align-items: center;
     padding-top: 40px;
-    color: var(--color-text);
-}
-
-a {
-    color: var(--color-highlight);
 }
 
 #container {

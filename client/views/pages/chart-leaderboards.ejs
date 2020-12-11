@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>USC IR - Chart Leaderboards</title>
+        <%- include("../partials/head.ejs") %>
+        <link href="/css/leaderboard.css" rel="stylesheet" />
+	</head>
+	<body>
+
+        <%- include("../partials/navbar.ejs") %>
+
+        <div id="container">
+                <h1>Chart Leaderboards</h1>
+
+                <div class="w-100"><hr></div>
+
+					<div id="charts-container">
+		                <form id="chart-form" class="needs-validation" novalidate name="chart" onsubmit="return false;">
+		                    <div class="form-group col-xs-4" style="text-align: center;">
+		                        <label for="song-select">Search for a song title, artist or effector:</label>
+		                        <input type="text" placeholder="Search" id="search-box">
+		                    </div>
+		                </form>
+
+		                <div class="w-100"><hr></div>
+
+		                <div id="result-container">
+
+		                </div>
+					</div>
+					<div id="scores-container" class="hidden">
+						<div class="row justify-content-between">
+                        	<div class="col-3" style="text-align: center; display: flex; flex-direction: column; justify-content: center;">
+								<div><button class="btn btn-highlight" id="back-to-charts" onclick="back_to_charts();">Back to Chart Select</button></div>
+							</div>
+    						<div class="col-9">
+								<div class="song">
+									<img id="scores-jacket"class="song-jacket" src="/img/defaultjacket.png">
+									<div class="song-data">
+										<div id="scores-info" class="song-info2">
+										</div>
+									</div>
+								</div>
+							</div>
+    					</div>
+						<div class="w-100"><hr></div>
+						<table class="table sortable" id="scores-table">
+							<thead>
+	                            <th scope="col" class="sorttable_alpha">Player</th>
+								<th scope="col" class="sorttable_numeric">Score</th>
+								<th scope="col" class="sorttable_numeric">Grade</th>
+	                            <th scope="col" class="sorttable_numeric">Lamp</th>
+	                            <th scope="col" class="sorttable_numeric">Crit</th>
+	                            <th scope="col" class="sorttable_numeric">Near</th>
+	                            <th scope="col" class="sorttable_numeric">Error</th>
+	                        </thead>
+	                        <tbody id="scores-body">
+
+	                        </tbody>
+						</table>
+					</div>
+				</div>
+
+
+        </div>
+
+
+        <script src="/js/chart-leaderboards.js"></script>
+    </body>
+</html>
