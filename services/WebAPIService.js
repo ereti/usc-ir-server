@@ -45,6 +45,15 @@ class WebAPIService
 
         return res.status(200).json(pbs);
     }
+
+    async GetToken(req, res)
+    {
+        let user = req.session.user;
+
+        let user_doc = await global.DB.get("users").findOne({username: user.username});
+
+        return res.status(200).json({token: user_doc.token});
+    }
 }
 
 module.exports = new WebAPIService();
