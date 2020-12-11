@@ -13,7 +13,7 @@ function create_record_row(score)
 {
     var row = $(`<tr></tr>`);
 
-    row.append($(`<td>${score.username}</td>`)); //username
+    row.append($(`<td><a href="/profiles/${score.username}">${score.username}</a></td>`)); //username
     row.append($(`<td>${score.score.score}</td>`)); //score
     row.append($(`<td>todo</td>`)); //grade
     row.append($(`<td>todo</td>`)); //lamp
