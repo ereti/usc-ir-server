@@ -1,6 +1,7 @@
 const Validation = require("../lib/validation.js");
 const monk = require("monk");
 const VERSION = "v0.2.0-a"; //current USC-IR version implemented below
+const DEFAULT_LEADERBOARD_N = 5;
 
 async function WillTrack(hash)
 {
@@ -330,6 +331,69 @@ class IRService {
             description: "",
             body: {}
         });
+    }
+
+    async Leaderboard(req, res)
+    {
+        let mode = req.query.mode;
+        let hash = req.params.chartHash;
+        let n = ("n" in req.query) ? parseInt(req.query.n) : DEFAULT_LEADERBOARD_N;
+
+        if(isNaN(n) || n < 0)
+        {
+            return res.json({
+                statusCode: 40,
+                description: "Bad n provided."
+            })
+        }
+
+        if(!mode) return res.json({
+            statusCode: 40,
+            description: "No mode provided."
+        })
+
+        if(!["best", "rivals"].includes(mode)) return res.json({
+            statusCode: 40,
+            description: "Bad mode provided."
+        })
+
+        if(!await WillTrack(hash)) return res.json({
+            statusCode: 42,
+            description: "IR will not track this chart."
+        })
+
+        const chart_doc = await global.DB.get("charts").findOne({chartHash: hash});
+
+        if(!chart_doc) return res.json({
+            statusCode: 44,
+            description: "Chart is not tracked."
+        });
+
+        if(mode == "best")
+        {
+            const scores = await global.DB.get("scores").find({chartHash: hash, isUserPB: true}, {sort: {"score.score": -1}, limit: n});
+
+            const serverscores = scores.map((e, i) => {
+                let ret = e.score;
+                ret.username = e.username;
+                ret.ranking = i+1;
+
+                return ret;
+            });
+
+            return res.json({
+                statusCode: 20,
+                description: "",
+                body: {scores: serverscores}
+            })
+        }
+        else
+        {
+            return res.json({
+                statusCode: 50, //we don't have an Unimplemented code so whatever
+                description: "Server does not support this mode"
+            })
+        }
     }
 }
 
