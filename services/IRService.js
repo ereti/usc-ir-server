@@ -11,6 +11,9 @@ async function WillTrack(hash)
     //so we should respond with 20
     if(!chart && !global.CONFIG.acceptNewCharts) return false;
 
+    //for administration later
+    if(chart && chart.banned) return false;
+
     return true;
 }
 
