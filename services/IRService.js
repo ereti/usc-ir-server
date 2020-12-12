@@ -309,7 +309,7 @@ class IRService {
         let score_obj = await global.DB.get("scores").findOne({_id: monk.id(score_id), username: req.user.username});
 
         if(!score_obj) return res.json({
-            statusCode: 40,
+            statusCode: 44,
             description: "Identifier did not identify one of your scores"
         });
 
