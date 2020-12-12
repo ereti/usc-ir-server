@@ -1,4 +1,5 @@
 const Validation = require("../lib/validation.js");
+const monk = require("monk");
 const VERSION = "v0.1.0-a"; //current USC-IR version implemented below
 
 async function WillTrack(hash)
@@ -274,6 +275,9 @@ class IRService {
             return ret;
         })
 
+        //don't forget to insert our score
+        let insert = await global.DB.get("scores").insert(dbScoreInsert);
+
         //finally, put it all together.
         let response = {
             score: newPBSS,
@@ -281,18 +285,46 @@ class IRService {
             adjacentAbove: adjacentAboveSS,
             adjacentBelow: adjacentBelowSS,
             isPB: isNewPB,
-            isServerRecord: isServerRecord
+            isServerRecord: isServerRecord,
+            sendReplay: isServerRecord ? insert._id.toString() : false //only take replays for new records because we're only going to send them out for records too
         };
-
-        //don't forget to insert our score
-        await global.DB.get("scores").insert(dbScoreInsert);
 
         return res.json({
             statusCode: 20,
             description: "",
             body: response
         })
+    }
 
+    async SubmitRecord(req, res)
+    {
+        let score_id = req.body.identifier;
+        let replay = req.file;
+
+        if(!score_id || !replay) return res.json({
+            statusCode: 40,
+            description: "Identifier or replay were not provided"
+        });
+
+        let score_obj = await global.DB.get("scores").findOne({_id: monk.id(score_id), username: req.user.username});
+
+        if(!score_obj) return res.json({
+            statusCode: 40,
+            description: "Identifier did not identify one of your scores"
+        });
+
+        if(score_obj.replay_path) return res.json({
+            statusCode: 40,
+            description: "Score already has a replay"
+        })
+
+        await global.DB.get("scores").update({_id: score_obj._id}, {$set: {replay_path: req.file.path}});
+
+        return res.json({
+            statusCode: 20,
+            description: "",
+            body: {}
+        });
     }
 }
 
