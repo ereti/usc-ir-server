@@ -126,7 +126,7 @@ class IRService {
             statusCode: 20,
             description: "",
             body: {
-                record: record
+                record:  Object.assign(record.score, {username: record.username, ranking: 1})
             }
         });
     }
