@@ -1,6 +1,6 @@
 const Validation = require("../lib/validation.js");
 const monk = require("monk");
-const VERSION = "v0.1.0-a"; //current USC-IR version implemented below
+const VERSION = "v0.2.0-a"; //current USC-IR version implemented below
 
 async function WillTrack(hash)
 {
@@ -117,11 +117,16 @@ class IRService {
             }
         });
 
+        if(!record) return res.json({
+            statusCode: 44,
+            description: "No record."
+        });
+
         return res.json({
             statusCode: 20,
             description: "",
             body: {
-                record: record ? Object.assign(record.score, {username: record.username, ranking: 1}) : null
+                record: record
             }
         });
     }
