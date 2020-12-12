@@ -22,6 +22,6 @@ router.get("/charts/:chartHash/record",             IRService.Record);
 router.get("/charts/:chartHash/leaderboard",        IRService.Leaderboard);
 router.post("/score/submit",                        IRService.SubmitScore);
 
-router.post("/replays", upload.single("replay"),    IRService.SubmitRecord);
+router.post("/replays", upload.single("replay"),    IRService.SubmitReplay);
 
 module.exports = router;

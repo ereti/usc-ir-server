@@ -305,7 +305,7 @@ class IRService {
         })
     }
 
-    async SubmitRecord(req, res)
+    async SubmitReplay(req, res)
     {
         let score_id = req.body.identifier;
         let replay = req.file;
