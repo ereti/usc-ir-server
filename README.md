@@ -1,7 +1,7 @@
 # usc-ir-server
 
 This server is a mostly usable example of an IR server for [unnamed-sdvx-clone](https://github.com/Drewol/unnamed-sdvx-clone).
-It implements the [USC-IR specification](https://uscir.readthedocs.io/en/latest/index.html).
+It implements v0.2.0a of the [USC-IR specification](https://uscir.readthedocs.io/en/latest/index.html).
 It also implements a web UI for registration, viewing of chart leaderboards, and viewing latest scores by a user.
 
 ## Prerequisites
