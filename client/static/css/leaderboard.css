@@ -83,10 +83,13 @@
 }
 
 .title, .artist {
-    display: inline-block;
-    text-overflow: ellipsis;
+    text-overflow: hidden;
     white-space: nowrap;
     overflow: hidden;
+}
+
+.title span, .artist span {
+    display: inline-block;
 }
 
 .level {

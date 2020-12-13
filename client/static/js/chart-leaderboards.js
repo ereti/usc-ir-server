@@ -26,6 +26,24 @@ $(document).ready(_  => {
     }
 })
 
+//https://stackoverflow.com/questions/34883555
+function make_scrolly(jq)
+{
+    jq.on('mouseenter', _ => {
+        let textWidth = jq[0].lastChild.clientWidth;
+        let boxWidth = parseFloat(getComputedStyle(jq[0]).width);
+        let translateVal = Math.min(boxWidth - textWidth, 0);
+        let translateTime = -0.01 * translateVal + "s";
+        jq[0].lastChild.style.transitionDuration = translateTime;
+        jq[0].lastChild.style.transform = `translateX(${translateVal}px)`;
+    })
+
+    jq.on("mouseleave", _ => {
+        jq[0].lastChild.style.transitionDuration = "0.3s";
+        jq[0].lastChild.style.transform = "translateX(0)";
+    })
+}
+
 
 function create_record_row(score)
 {
@@ -50,8 +68,14 @@ function create_song_dom(song)
     let data = $(`<div class="song-data"></div>`);
 
     let info = $(`<div class="song-info"></div>`);
-    info.append($(`<span class="title">${song.title}</span>`));
-    info.append($(`<span class="artist">${song.artist}</span>`));
+
+    let title = $(`<div class="title"><span>${song.title}</span></div>`)
+    let artist = $(`<div class="artist"><span>${song.artist}</span></div>`)
+    info.append(title);
+    info.append(artist);
+
+    make_scrolly(title);
+    make_scrolly(artist);
 
     data.append(info);
 
@@ -72,21 +96,7 @@ function create_song_dom(song)
 
         chart_dom.append(effector);
 
-        //https://stackoverflow.com/questions/34883555
-        effector.on('mouseenter', _ => {
-            let textWidth = effector[0].lastChild.clientWidth;
-            let boxWidth = parseFloat(getComputedStyle(effector[0]).width);
-            let translateVal = Math.min(boxWidth - textWidth, 0);
-            let translateTime = -0.01 * translateVal + "s";
-            effector[0].lastChild.style.transitionDuration = translateTime;
-            effector[0].lastChild.style.transform = `translateX(${translateVal}px)`;
-        })
-
-        effector.on("mouseleave", _ => {
-            effector[0].lastChild.style.transitionDuration = "0.3s";
-            effector[0].lastChild.style.transform = "translateX(0)";
-        })
-
+        make_scrolly(effector);
 
 
         charts.append(chart_dom);
