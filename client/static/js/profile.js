@@ -27,9 +27,9 @@ function add_score(score, chart_hashmap)
     }
 
 
-    row.append($(`<td>${score.score.score}</td>`)); //score
-    row.append($(`<td>todo</td>`)); //grade
-    row.append($(`<td>todo</td>`)); //lamp
+    row.append($(`<td>${score.score.score.toString().padStart(8, "0")}</td>`)); //score
+    row.append($(`<td><img height="48" src="/img/grades/${get_grade(score.score.score)}.png"></td>`)); //grade
+    row.append($(`<td><img height="48" src="/img/lamps/${get_lamp(score.score.lamp)}.png"></td>`)); //lamp
     row.append($(`<td>${score.score.crit}</td>`)) //crit
     row.append($(`<td>${score.score.near}</td>`));
     row.append($(`<td>${score.score.error}</td>`));
