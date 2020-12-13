@@ -14,7 +14,7 @@ docker pull mongo
 docker run -d -p 27017:27017 --name mongodb mongo
 ```
 
-You may also wish to set up the server behind an [NginX](https://nginx.com/) reverse proxy, for HTTPS.
+You may also wish to set up the server behind an [NginX](https://nginx.com/) reverse proxy, for HTTPS. The details of how to do this will not be included here, but guides online are prolific. Here is a [link to one](https://www.digitalocean.com/community/tutorials/how-to-set-up-a-node-js-application-for-production-on-ubuntu-20-04).
 
 You will also need to install the modules used by the server. Since package.json is provided, this is as simple as running: 
 
@@ -63,3 +63,31 @@ acceptAtypicalWindows: When the server receives a score that uses windows other 
   false: the server will reject the score
   Default: false
 ```
+
+## Scripts
+
+In the scripts directory are some simple node scripts that can be used alongside the server.
+
+### import.js
+
+This script is used to import charts into the server. It may be used in conjunction with acceptNewCharts: false to establish a whitelist of charts, for instance, if you only want to accept converts of official charts. It expects you to fill the 'import' directory in the same directory as it with all of your chart folders, which it will then check for, and import, .ksh files to the database specified in the server's config.json.
+
+Example:
+
+```
+scripts/
+  import/
+    666/
+      mxm.ksh
+      exh.ksh
+    vvelcome/
+      mxm.ksh
+      exh.ksh
+    sdvx_vividwave/
+      overflow/
+        mxm.ksh
+    random.ksh
+  import.js
+```
+
+Running 'node import.js' would import the MXM and EXH of both 666 and VVelcome!!. random.ksh would not be imported, nor would Ωverflow MXM.
