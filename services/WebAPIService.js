@@ -69,7 +69,7 @@ class WebAPIService
 
         if(!user_doc) return res.status(404).json({error:"User not found."});
 
-        let scores = await global.DB.get("scores").find({username}, {$sort: {timestamp: -1}}); //return most recent first by default
+        let scores = await global.DB.get("scores").find({username}, {sort: {"score.timestamp": -1}}); //return most recent first by default
 
         if(embed_charts) //this option to deal with the problem of scores not having chart data embedded is probably kind of nasty compared to performing a query for charts on the clientside if needed but ehhhhh
         {
