@@ -31,7 +31,7 @@ function ScoreObjectToServerScore(score)
         else if(score.error == 0) ServerScore.lamp = 4;
         //hard gauge
         else if((score.gameflags & 0b1 != 0) && score.gauge > 0) ServerScore.lamp = 3;
-        else if(score.gauge >= 70) ServerScore.lamp = 2;
+        else if(score.gauge >= 0.70) ServerScore.lamp = 2;
         else ServerScore.lamp = 1
     }
 
