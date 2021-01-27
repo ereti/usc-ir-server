@@ -1,3 +1,8 @@
+const crypto = require("crypto");
+const util = require("util");
+
+const randomBytesPromise = util.promisify(crypto.randomBytes);
+
 class WebAPIService
 {
     async QueryCharts(req, res)
@@ -94,6 +99,28 @@ class WebAPIService
         let user_doc = await global.DB.get("users").findOne({username: user.username});
 
         return res.status(200).json({token: user_doc.token});
+    }
+
+    async ResetToken(req, res)
+    {
+        let user = req.session.user;
+
+        let token;
+
+        //this is terrifying but it should only ever run once in reality
+        do {
+            token = (await randomBytesPromise(8)).toString("hex");
+        } while (await global.DB.get("users").findOne({ token }));
+
+        await global.DB.get("users").update({
+            username: user.username
+        }, {
+            $set: {
+                token
+            }
+        });
+
+        return res.status(200).json({token})
     }
 }
 

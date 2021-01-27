@@ -10,6 +10,15 @@ function load_token()
     })
 }
 
+function reset_token()
+{
+    fetch("/api/token/reset")
+    .then(res => res.json())
+    .then(json => {
+        $("#token").val(json.token);
+    })
+}
+
 function add_score(score, chart_hashmap)
 {
     var row = $(`<tr></tr>`);
