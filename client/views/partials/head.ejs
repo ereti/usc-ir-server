@@ -12,4 +12,6 @@ just force mobile to view the desktop version for now until we can make the site
     crossorigin="anonymous"></script>
 <link href="/css/common.css" rel="stylesheet" />
 <script src="/js/common.js"></script>
+<% if(CONFIG.recaptcha.enabled) { %>
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<% } %>

@@ -55,10 +55,12 @@
                                 <input type="password" name="password" class="form-control" id="password-register"
                                     placeholder="Password" required minlength="8" maxlength="50">
                             </div>
+                            <% if(CONFIG.recaptcha.enabled) { %>
                             <div class="form-group">
                                 <div id="recaptcha-register" class="g-recaptcha"
-                                    data-sitekey="<%= CONFIG.recaptchaSiteKey%>"></div>
+                                    data-sitekey="<%= CONFIG.recaptcha.recaptchaSiteKey%>"></div>
                             </div>
+                            <% } %>
                             <div class="invalid-feedback" id="register-feedback">
                             </div>
                             <button type="submit" class="btn btn-primary">Register</button>

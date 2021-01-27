@@ -41,13 +41,14 @@ if (register) register.onsubmit = _ => {
         body: JSON.stringify({
             username: register.username.value,
             password: register.password.value,
-            recaptcha: grecaptcha.getResponse()
+            recaptcha: typeof grecaptcha != "undefined" ? grecaptcha.getResponse() : null
         }),
         credentials: "same-origin"
     }).then(res => {
         if (!res.ok) res.json().then(json => error(json, "register"));
         else window.location.reload(true);
     })
-    grecaptcha.reset();
+
+    if(typeof grecaptcha != "undefined") grecaptcha.reset();
     return false;
 }

@@ -2,6 +2,11 @@
     "https": false,
     "hashWorkFactor": 12,
     "webUICookieSecret": "you should definitely change me :)",
+    "recaptcha": {
+        "enabled": false,
+        "recaptchaSecret": "replace me",
+        "recaptchaSiteKey": "replace me"
+    },
     "serverPort": 8080,
     "serverName": "USC-IR-Server",
     "database": "localhost",
@@ -14,7 +19,5 @@
         "hold": 138,
         "miss": 250
     },
-    "acceptAtypicalWindows": false,
-    "recaptchaSecret": "replace me",
-    "recaptchaSiteKey": "replace me"
+    "acceptAtypicalWindows": false
 }
