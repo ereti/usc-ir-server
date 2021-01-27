@@ -14,5 +14,7 @@
         "hold": 138,
         "miss": 250
     },
-    "acceptAtypicalWindows": false
+    "acceptAtypicalWindows": false,
+    "recaptchaSecret": "replace me",
+    "recaptchaSiteKey": "replace me"
 }
