@@ -16,7 +16,7 @@ docker run -d -p 27017:27017 --name mongodb mongo
 
 You may also wish to set up the server behind an [NginX](https://nginx.com/) reverse proxy, for HTTPS. The details of how to do this will not be included here, but guides online are prolific. Here is a [link to one](https://www.digitalocean.com/community/tutorials/how-to-set-up-a-node-js-application-for-production-on-ubuntu-20-04).
 
-You will also need to install the modules used by the server. Since package.json is provided, this is as simple as running: 
+You will also need to install the modules used by the server. Since package.json is provided, this is as simple as running:
 
 ```
 npm install
@@ -24,7 +24,7 @@ npm install
 
 ## Running
 
-The server can be ran with 
+The server can be ran with
 
 ```
 node index.js
@@ -47,6 +47,10 @@ https: Whether the server should assume it is using HTTPS
   Default: false
 hashWorkFactor: The work factor to use for hashing passwords with bcrypt. Bigger = more secure but takes longer. Default: 12
 webUICookieSecret: The secret used to generate session cookies for the web UI. This should be changed, as without it your sessions are unsecure. The default does not matter. Change it.
+recaptcha:
+    enabled: Whether to use reCAPTCHA to prevent registrations by bots. Default: false
+    recaptchaSecret: Your reCAPTCHA secret, if recaptcha is enabled.
+    recaptchaSiteKey: Your reCAPTCHA site key, if recaptcha is enabled.
 serverPort: The port the server will listen on. Default: 8080
 serverName: How the server identifies itself in IR Heartbeat requests. Also how the server identifies itself on the web UI. Default: USC-IR-Server
 database: The IP to connect to the MongoDB instance on. Default: localhost
@@ -56,7 +60,7 @@ acceptNewCharts: When the server receives a score for a chart it has never seen 
   false: the server will reject the score with statusCode 42.
   Default: true
 adjacentRecordsN: The number of scores to either side of the player's PB to return in the response to score submissions. Default: 2
-typicalWindows: The hit windows that will be considered 'typical' by the server. 
+typicalWindows: The hit windows that will be considered 'typical' by the server.
   Default: {perfect: 46, good: 92, hold: 138, miss: 250} (i.e, the same as the USC default hit windows)
 acceptAtypicalWindows: When the server receives a score that uses windows other than typicalWindows:
   true: the server will accept the score
