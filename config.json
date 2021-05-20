@@ -15,9 +15,10 @@
     "adjacentRecordsN": 2,
     "typicalWindows": {
         "perfect": 46,
-        "good": 92,
-        "hold": 138,
-        "miss": 250
+        "good": 150,
+        "hold": 150,
+        "miss": 300,
+        "slam": 84
     },
     "acceptAtypicalWindows": false
 }
