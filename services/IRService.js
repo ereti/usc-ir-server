@@ -3,7 +3,7 @@ const monk = require("monk");
 const VERSION = "v0.2.0-a"; //current USC-IR version implemented below
 const DEFAULT_LEADERBOARD_N = 5;
 
-async function WillTrack(hash)
+async function WillTrack(hash) 
 {
     let chart = await global.DB.get("charts").findOne({chartHash: hash});
 
@@ -19,8 +19,9 @@ async function WillTrack(hash)
 
 //note: the score returned from this does not have ranking, because that should be dynamically generated elsewhere
 //it also does not have username, because we want to store that outside the score object logically in our db
-function ScoreObjectToServerScore(score)
+function ScoreObjectToServerScore(score) 
 {
+    const GaugeNames = ["NORMAL", "HARD"]
     let ServerScore = {};
 
     ServerScore.score = score.score;
@@ -30,7 +31,7 @@ function ScoreObjectToServerScore(score)
         if(score.score == 10000000) ServerScore.lamp = 5;
         else if(score.error == 0) ServerScore.lamp = 4;
         //hard gauge
-        else if((score.gameflags & 0b1 != 0) && score.gauge > 0) ServerScore.lamp = 3;
+        else if((score.options.gaugeType === 1) && score.gauge > 0) ServerScore.lamp = 3;
         else if(score.gauge >= 0.70) ServerScore.lamp = 2;
         else ServerScore.lamp = 1
     }
@@ -41,12 +42,12 @@ function ScoreObjectToServerScore(score)
     ServerScore.near = score.near;
     ServerScore.error = score.error;
 
-    ServerScore.gaugeMod = (score.gameflags & 0b1 != 0) ? "HARD" : "NORMAL";
+    ServerScore.gaugeMod = GaugeNames[score.options.gaugeType];
 
     //notemod
     {
-        let random = score.gameflags & 0b100 != 0;
-        let mirror = score.gameflags & 0b10  != 0;
+        let random = score.options.random;
+        let mirror = score.options.mirror;
 
         if(random & mirror) ServerScore.noteMod = "MIR-RAN";
         else if(random) ServerScore.noteMod = "RANDOM";
@@ -60,7 +61,7 @@ function ScoreObjectToServerScore(score)
 class IRService {
     //Middleware to authenticate the provided token and return a 41/43 if necessary.
     //On success, calls next while also setting user on req for use further down the line.
-    async Authorize(req, res, next)
+    async Authorize(req, res, next) 
     {
         let authHeader = req.header("Authorization");
 
@@ -80,7 +81,7 @@ class IRService {
         return next();
     }
 
-    async Heartbeat(req, res)
+    async Heartbeat(req, res) 
     {
         return res.json({
             statusCode: 20,
@@ -93,7 +94,7 @@ class IRService {
         });
     }
 
-    async ChartTracked(req, res)
+    async ChartTracked(req, res) 
     {
         let hash = req.params.chartHash;
 
@@ -106,7 +107,7 @@ class IRService {
         })
     }
 
-    async Record(req, res)
+    async Record(req, res) 
     {
         let hash = req.params.chartHash;
 
@@ -130,12 +131,12 @@ class IRService {
             statusCode: 20,
             description: "",
             body: {
-                record:  Object.assign(record.score, {username: record.username, ranking: 1})
+                record: Object.assign(record.score, {username: record.username, ranking: 1})
             }
         });
     }
 
-    async SubmitScore(req, res)
+    async SubmitScore(req, res) 
     {
         let chart = req.body.chart;
         let score = req.body.score;
@@ -187,7 +188,7 @@ class IRService {
         //step 5 (just makes sense to be established here)
         let isNewPB = !currentPBDoc || serverScore.score >= currentPBDoc.score.score;
 
-        if(isNewPB)
+        if(isNewPB) 
         {
             dbScoreInsert.isUserPB = true;
 
@@ -305,7 +306,7 @@ class IRService {
         })
     }
 
-    async SubmitReplay(req, res)
+    async SubmitReplay(req, res) 
     {
         let score_id = req.body.identifier;
         let replay = req.file;
@@ -336,13 +337,13 @@ class IRService {
         });
     }
 
-    async Leaderboard(req, res)
+    async Leaderboard(req, res) 
     {
         let mode = req.query.mode;
         let hash = req.params.chartHash;
         let n = ("n" in req.query) ? parseInt(req.query.n) : DEFAULT_LEADERBOARD_N;
 
-        if(isNaN(n) || n < 0)
+        if(isNaN(n) || n < 0) 
         {
             return res.json({
                 statusCode: 40,
@@ -372,7 +373,7 @@ class IRService {
             description: "Chart is not tracked."
         });
 
-        if(mode == "best")
+        if(mode == "best") 
         {
             const scores = await global.DB.get("scores").find({chartHash: hash, isUserPB: true}, {sort: {"score.score": -1}, limit: n});
 
@@ -390,7 +391,7 @@ class IRService {
                 body: {scores: serverscores}
             })
         }
-        else
+        else 
         {
             return res.json({
                 statusCode: 50, //we don't have an Unimplemented code so whatever
