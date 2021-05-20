@@ -61,7 +61,7 @@ acceptNewCharts: When the server receives a score for a chart it has never seen 
   Default: true
 adjacentRecordsN: The number of scores to either side of the player's PB to return in the response to score submissions. Default: 2
 typicalWindows: The hit windows that will be considered 'typical' by the server.
-  Default: {perfect: 46, good: 92, hold: 138, miss: 250} (i.e, the same as the USC default hit windows)
+  Default: {perfect: 46, good: 150, hold: 150, miss: 300, slam: 84} (i.e, the same as the USC default hit windows)
 acceptAtypicalWindows: When the server receives a score that uses windows other than typicalWindows:
   true: the server will accept the score
   false: the server will reject the score
